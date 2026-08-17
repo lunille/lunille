@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lunille Body Glow</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fff8f5;
+            color: #4b3832;
+        }
+
+        header {
+            background: #f3d9d0;
+            text-align: center;
+            padding: 30px;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+        }
+
+        .products {
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .product-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .product {
+            background: white;
+            width: 250px;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .product img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 15px;
+        }
+
+        button {
+            background: #9b6b5d;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        #cart {
+            display: none;
+            background: white;
+            width: 90%;
+            max-width: 550px;
+            margin: 30px auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            gap: 10px;
+        }
+
+        .remove {
+            background: #c66;
+            padding: 6px 10px;
+        }
+
+        .total {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .form {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .form input {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        footer {
+            margin-top: 40px;
+            background: #4b3832;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <h1>Lunille Body Glow</h1>
+
+    <p>
+        جمالك يبدأ من عنايتك بنفسك ✨
+    </p>
+
+    <br>
+
+    <button onclick="showCart()">
+        🛒 السلة
+        (<span id="count">0</span>)
+    </button>
+
+</header>
+
+
+<section class="products">
+
+    <h2>منتجاتنا</h2>
+
+    <div class="product-container">
+
+
+        <div class="product">
+
+            <img src="perfume.jpg" alt="العطر">
+
+            <h3>Perfume</h3>
+
+            <p>عطر Lunille</p>
+
+            <div class="price">
+                80 شيكل
+            </div>
+
+            <button onclick="addProduct('Perfume', 80)">
+                أضيفي للسلة
+            </button>
+
+        </div>
+
+
+        <div class="product">
+
+            <img src="butter.jpeg" alt="زبدة الجسم">
+
+            <h3>Body Butter</h3>
+
+            <p>زبدة الجسم</p>
+
+            <div class="price">
+                45 شيكل
+            </div>
+
+            <button onclick="addProduct('Body Butter', 45)">
+                أضيفي للسلة
+            </button>
+
+        </div>
+
+
+        <div class="product">
+
+            <img src="moroccan.jpeg" alt="الصابونة المغربية">
+
+            <h3>Moroccan Soap</h3>
+
+            <p>الصابونة المغربية</p>
+
+            <div class="price">
+                45 شيكل
+            </div>
+
+            <button onclick="addProduct('Moroccan Soap', 45)">
+                أضيفي للسلة
+            </button>
+
+        </div>
+
+
+        <div class="product">
+
+            <img src="scrub.jpeg" alt="المقشر">
+
+            <h3>Body Scrub</h3>
+
+            <p>مقشر للجسم</p>
+
+            <div class="price">
+                45 شيكل
+            </div>
+
+            <button onclick="addProduct('Body Scrub', 45)">
+                أضيفي للسلة
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="cart">
+
+    <h2>🛒 سلة المشتريات</h2>
+
+    <div id="items"></div>
+
+    <div class="total">
+
+        المجموع:
+
+        <span id="total">0</span>
+
+        شيكل
+
+    </div>
+
+    <button onclick="checkout()">
+        إتمام الطلب
+    </button>
+
+
+    <div class="form" id="form">
+
+        <h3>بيانات الطلب</h3>
+
+        <input
+            id="name"
+            type="text"
+            placeholder="الاسم الكامل"
+        >
+
+        <input
+            id="phone"
+            type="tel"
+            placeholder="رقم الهاتف"
+        >
+
+        <input
+            id="address"
+            type="text"
+            placeholder="عنوان التوصيل"
+        >
+
+        <button onclick="sendOrder()">
+            تأكيد الطلب
+        </button>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 Lunille Body Glow
+    </p>
+
+    <p>
+        جميع الحقوق محفوظة
+    </p>
+
+</footer>
+
+
+<script>
+
+let cart = [];
+
+
+function addProduct(name, price) {
+
+    cart.push({
+        name: name,
+        price: price
+    });
+
+    updateCart();
+
+    alert("تمت إضافة المنتج للسلة 🛒");
+
+}
+
+
+function updateCart() {
+
+    document.getElementById("count").textContent = cart.length;
+
+    let items = document.getElementById("items");
+
+    items.innerHTML = "";
+
+    let total = 0;
+
+
+    for (let i = 0; i < cart.length; i++) {
+
+        total = total + cart[i].price;
+
+        items.innerHTML +=
+
+            "<div class='cart-item'>" +
+
+            "<span>" +
+
+            cart[i].name +
+
+            " - " +
+
+            cart[i].price +
+
+            " شيكل" +
+
+            "</span>" +
+
+            "<button class='remove' onclick='removeProduct(" +
+
+            i +
+
+            ")'>حذف</button>" +
+
+            "</div>";
+
+    }
+
+
+    document.getElementById("total").textContent = total;
+
+}
+
+
+function removeProduct(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+
+}
+
+
+function showCart() {
+
+    document.getElementById("cart").style.display = "block";
+
+    document.getElementById("cart").scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+function checkout() {
+
+    if (cart.length === 0) {
+
+        alert("السلة فارغة 🛒");
+
+        return;
+
+    }
+
+    document.getElementById("form").style.display = "block";
+
+}
+
+
+function sendOrder() {
+
+    let name = document.getElementById("name").value;
+
+    let phone = document.getElementById("phone").value;
+
+    let address = document.getElementById("address").value;
+
+
+    if (
+        name === "" ||
+        phone === "" ||
+        address === ""
+    ) {
+
+        alert("يرجى تعبئة جميع البيانات ❤️");
+
+        return;
+
+    }
+
+
+    let total = 0;
+
+    let products = "";
+
+
+    for (let i = 0; i < cart.length; i++) {
+
+        total = total + cart[i].price;
+
+        products +=
+            "• " +
+            cart[i].name +
+            " - " +
+            cart[i].price +
+            " شيكل\n";
+
+    }
+
+
+    /* رقم واتساب المتجر */
+
+    let storeNumber = "970599963424";
+
+
+    let message =
+
+        "🛍️ طلب جديد - Lunille Body Glow\n\n" +
+
+        "👤 الاسم: " +
+        name +
+        "\n" +
+
+        "📱 الهاتف: " +
+        phone +
+        "\n" +
+
+        "📍 العنوان: " +
+        address +
+        "\n\n" +
+
+        "🧴 المنتجات:\n" +
+
+        products +
+
+        "\n💰 المجموع: " +
+
+        total +
+
+        " شيكل";
+
+
+    let whatsappURL =
+
+        "https://wa.me/" +
+
+        storeNumber +
+
+        "?text=" +
+
+        encodeURIComponent(message);
+
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>
