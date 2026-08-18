@@ -8,9 +8,13 @@
     <title>Lunille Body Glow</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: "Trebuchet MS", Arial, sans-serif;
             background: #fff8f5;
             color: #4b3832;
         }
@@ -18,54 +22,90 @@
         header {
             background: #f3d9d0;
             text-align: center;
-            padding: 30px;
+            padding: 28px 20px;
         }
 
         header h1 {
             margin: 0 0 10px;
+            font-family: Georgia, serif;
+            font-size: 32px;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 17px;
+            margin-bottom: 20px;
         }
 
         .products {
-            padding: 30px 20px;
+            padding: 28px 15px;
+        }
+
+        .products h2 {
             text-align: center;
+            margin-bottom: 22px;
+            font-family: Georgia, serif;
         }
 
         .product-container {
             display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
+            gap: 18px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            padding: 8px 5px 22px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .product-container::-webkit-scrollbar {
+            height: 6px;
         }
 
         .product {
+            flex: 0 0 220px;
             background: white;
-            width: 250px;
-            padding: 15px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            padding: 12px;
+            border-radius: 18px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            scroll-snap-align: start;
         }
 
         .product img {
             width: 100%;
-            height: 250px;
+            height: 185px;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: 14px;
+        }
+
+        .product h3 {
+            font-size: 17px;
+            margin: 13px 5px 7px;
+        }
+
+        .product p {
+            margin: 5px;
+            font-size: 14px;
+            color: #765c53;
         }
 
         .price {
-            font-size: 20px;
+            font-size: 19px;
             font-weight: bold;
-            margin: 15px;
+            margin: 14px 5px;
         }
 
         button {
             background: #9b6b5d;
             color: white;
             border: none;
-            padding: 12px 20px;
+            padding: 11px 17px;
             border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 14px;
         }
 
         button:hover {
@@ -75,12 +115,12 @@
         #cart {
             display: none;
             background: white;
-            width: 90%;
-            max-width: 550px;
-            margin: 30px auto;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            width: 92%;
+            max-width: 600px;
+            margin: 25px auto;
+            padding: 22px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
 
         .cart-item {
@@ -98,25 +138,40 @@
         }
 
         .total {
-            font-size: 22px;
+            font-size: 21px;
             font-weight: bold;
             margin: 20px 0;
         }
-
         .form {
             display: none;
             margin-top: 20px;
         }
 
-        .form input {
+        .form input,
+        .form select {
             display: block;
             width: 100%;
             padding: 12px;
             margin: 8px 0;
-            box-sizing: border-box;
             border: 1px solid #ddd;
             border-radius: 10px;
             font-size: 16px;
+            background: white;
+        }
+
+        .delivery-info {
+            background: #fff8f5;
+            padding: 13px;
+            border-radius: 12px;
+            margin: 15px 0;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .delivery-total {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0 20px;
         }
 
         footer {
@@ -125,6 +180,20 @@
             color: white;
             text-align: center;
             padding: 25px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 27px;
+            }
+
+            .product {
+                flex-basis: 205px;
+            }
+
+            .product img {
+                height: 170px;
+            }
         }
     </style>
 </head>
@@ -138,8 +207,6 @@
     <p>
         جمالك يبدأ من عنايتك بنفسك ✨
     </p>
-
-    <br>
 
     <button onclick="showCart()">
         🛒 السلة
@@ -155,12 +222,12 @@
 
     <div class="product-container">
 
-
+        <!-- العطر -->
         <div class="product">
 
             <img src="perfume.jpg" alt="العطر">
 
-            <h3>Perfume</h3>
+            <h3>Lunille Perfume - Passion</h3>
 
             <p>عطر Lunille</p>
 
@@ -168,16 +235,17 @@
                 80 شيكل
             </div>
 
-            <button onclick="addProduct('Perfume', 80)">
+            <button onclick="addProduct('Lunille Perfume - Passion', 80)">
                 أضيفي للسلة
             </button>
 
         </div>
 
 
+        <!-- زبدة الجسم -->
         <div class="product">
 
-            <img src="butter.jpeg" alt="زبدة الجسم">
+            <img src="butter-new.jpg.jpeg" alt="زبدة الجسم">
 
             <h3>Body Butter</h3>
 
@@ -194,9 +262,10 @@
         </div>
 
 
+        <!-- الصابونة المغربية -->
         <div class="product">
 
-            <img src="moroccan.jpeg" alt="الصابونة المغربية">
+            <img src="soap-new.jpg.jpeg" alt="الصابونة المغربية">
 
             <h3>Moroccan Soap</h3>
 
@@ -213,9 +282,10 @@
         </div>
 
 
+        <!-- المقشر -->
         <div class="product">
 
-            <img src="scrub.jpeg" alt="المقشر">
+            <img src="scrub-new.jpg.jpeg" alt="مقشر الجسم">
 
             <h3>Body Scrub</h3>
 
@@ -226,6 +296,46 @@
             </div>
 
             <button onclick="addProduct('Body Scrub', 45)">
+                أضيفي للسلة
+            </button>
+
+        </div>
+
+
+        <!-- الليفة المغربية -->
+        <div class="product">
+
+            <img src="loofah.jpg.jpeg" alt="الليفة المغربية">
+
+            <h3>Moroccan Loofah</h3>
+
+            <p>الليفة المغربية</p>
+
+            <div class="price">
+                15 شيكل
+            </div>
+
+            <button onclick="addProduct('Moroccan Loofah', 15)">
+                أضيفي للسلة
+            </button>
+
+        </div>
+
+
+        <!-- المنتج الجديد -->
+        <div class="product">
+
+            <img src="products.jpg.jpeg" alt="منتج Lunille الجديد">
+
+            <h3>Lunille Product</h3>
+
+            <p>منتج Lunille</p>
+
+            <div class="price">
+                130 شيكل
+            </div>
+
+            <button onclick="addProduct('Lunille Product', 130)">
                 أضيفي للسلة
             </button>
 
@@ -243,20 +353,14 @@
     <div id="items"></div>
 
     <div class="total">
-
         المجموع:
-
         <span id="total">0</span>
-
         شيكل
-
     </div>
 
     <button onclick="checkout()">
         إتمام الطلب
     </button>
-
-
     <div class="form" id="form">
 
         <h3>بيانات الطلب</h3>
@@ -279,6 +383,30 @@
             placeholder="عنوان التوصيل"
         >
 
+        <select id="delivery">
+            <option value="">اختاري منطقة التوصيل</option>
+            <option value="20">الضفة الغربية - 20 شيكل</option>
+            <option value="30">القدس - 30 شيكل</option>
+            <option value="70">الداخل الفلسطيني - 70 شيكل</option>
+        </select>
+
+        <div class="delivery-info">
+            🚚 أسعار التوصيل:<br>
+            الضفة الغربية: 20 شيكل<br>
+            القدس: 30 شيكل<br>
+            الداخل الفلسطيني: 70 شيكل
+        </div>
+
+        <div class="delivery-total">
+            تكلفة التوصيل:
+            <span id="deliveryPrice">0</span>
+            شيكل
+            <br><br>
+            المجموع النهائي:
+            <span id="finalTotal">0</span>
+            شيكل
+        </div>
+
         <button onclick="sendOrder()">
             تأكيد الطلب
         </button>
@@ -291,7 +419,7 @@
 <footer>
 
     <p>
-        © 2026 Lunille Body Glow
+        ©️ 2026 Lunille Body Glow
     </p>
 
     <p>
@@ -316,7 +444,6 @@ function addProduct(name, price) {
     updateCart();
 
     alert("تمت إضافة المنتج للسلة 🛒");
-
 }
 
 
@@ -358,12 +485,12 @@ function updateCart() {
             ")'>حذف</button>" +
 
             "</div>";
-
     }
 
 
     document.getElementById("total").textContent = total;
 
+    updateFinalTotal();
 }
 
 
@@ -372,7 +499,6 @@ function removeProduct(index) {
     cart.splice(index, 1);
 
     updateCart();
-
 }
 
 
@@ -383,7 +509,6 @@ function showCart() {
     document.getElementById("cart").scrollIntoView({
         behavior: "smooth"
     });
-
 }
 
 
@@ -394,33 +519,63 @@ function checkout() {
         alert("السلة فارغة 🛒");
 
         return;
-
     }
 
     document.getElementById("form").style.display = "block";
 
+    updateFinalTotal();
 }
+
+
+function updateFinalTotal() {
+
+    let total = 0;
+
+    for (let i = 0; i < cart.length; i++) {
+        total = total + cart[i].price;
+    }
+
+    let delivery =
+        parseInt(document.getElementById("delivery").value) || 0;
+
+    document.getElementById("deliveryPrice").textContent = delivery;
+
+    document.getElementById("finalTotal").textContent =
+        total + delivery;
+}
+
+
+document.getElementById("delivery").addEventListener(
+    "change",
+    updateFinalTotal
+);
 
 
 function sendOrder() {
 
-    let name = document.getElementById("name").value;
+    let name =
+        document.getElementById("name").value;
 
-    let phone = document.getElementById("phone").value;
+    let phone =
+        document.getElementById("phone").value;
 
-    let address = document.getElementById("address").value;
+    let address =
+        document.getElementById("address").value;
+
+    let delivery =
+        parseInt(document.getElementById("delivery").value) || 0;
 
 
     if (
         name === "" ||
         phone === "" ||
-        address === ""
+        address === "" ||
+        delivery === 0
     ) {
 
-        alert("يرجى تعبئة جميع البيانات ❤️");
+        alert("يرجى تعبئة جميع البيانات واختيار منطقة التوصيل ❤️");
 
         return;
-
     }
 
 
@@ -439,11 +594,11 @@ function sendOrder() {
             " - " +
             cart[i].price +
             " شيكل\n";
-
     }
 
 
-    /* رقم واتساب المتجر */
+    let finalTotal = total + delivery;
+
 
     let storeNumber = "970599963424";
 
@@ -468,9 +623,21 @@ function sendOrder() {
 
         products +
 
-        "\n💰 المجموع: " +
+        "\n💰 مجموع المنتجات: " +
 
         total +
+
+        " شيكل\n" +
+
+        "🚚 التوصيل: " +
+
+        delivery +
+
+        " شيكل\n" +
+
+        "💵 المجموع النهائي: " +
+
+        finalTotal +
 
         " شيكل";
 
